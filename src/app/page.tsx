@@ -44,7 +44,7 @@ const MENU_ITEMS: MenuItem[] = [
     badges: ["🏆 Bestseller", "🐟 Fresh Catch", "🌶️ Custom Spice"],
     hasUgali: true,
     hasPepper: true,
-    image: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Traditional_Vegetables%28Mrenda%29_with_Omena%28fish%29_delicacy_from_Kenya.jpg"
+    image: "https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?auto=format&fit=crop&q=80&w=800"
   },
   {
     id: "dagaa-stewed",
@@ -55,7 +55,7 @@ const MENU_ITEMS: MenuItem[] = [
     badges: ["🔥 Slow Cooked", "🍲 Savory Gravy"],
     hasUgali: true,
     hasPepper: true,
-    image: "https://upload.wikimedia.org/wikipedia/commons/2/27/Ugali_%26_Samaki.jpg"
+    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800"
   },
   {
     id: "madafu",
@@ -336,7 +336,7 @@ export default function Home() {
           </div>
           <div className="hero-image-container">
             <Image
-              src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Traditional_Vegetables%28Mrenda%29_with_Omena%28fish%29_delicacy_from_Kenya.jpg"
+              src="https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?auto=format&fit=crop&q=80&w=800"
               alt="Dagaa wa Kukaanga na Ugali wa Muhogo"
               width={420}
               height={320}
