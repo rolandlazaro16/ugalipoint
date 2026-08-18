@@ -44,7 +44,7 @@ const MENU_ITEMS: MenuItem[] = [
     badges: ["🏆 Bestseller", "🐟 Fresh Catch", "🌶️ Custom Spice"],
     hasUgali: true,
     hasPepper: true,
-    image: "https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?auto=format&fit=crop&q=80&w=800"
+    image: "/dagaa_special.png"
   },
   {
     id: "dagaa-stewed",
@@ -55,7 +55,7 @@ const MENU_ITEMS: MenuItem[] = [
     badges: ["🔥 Slow Cooked", "🍲 Savory Gravy"],
     hasUgali: true,
     hasPepper: true,
-    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800"
+    image: "/dagaa_stewed.jpg"
   },
   {
     id: "madafu",
@@ -66,7 +66,7 @@ const MENU_ITEMS: MenuItem[] = [
     badges: ["🥥 Natural", "🧊 Served Cold"],
     hasUgali: false,
     hasPepper: false,
-    image: "https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&q=80&w=800"
+    image: "/madafu.jpg"
   },
   {
     id: "chai-tangawizi",
@@ -77,7 +77,7 @@ const MENU_ITEMS: MenuItem[] = [
     badges: ["☕ Hot Brew", "🌱 Immune Boost"],
     hasUgali: false,
     hasPepper: false,
-    image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&q=80&w=800"
+    image: "/chai_tangawizi.jpg"
   }
 ];
 
@@ -336,13 +336,12 @@ export default function Home() {
           </div>
           <div className="hero-image-container">
             <Image
-              src="https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?auto=format&fit=crop&q=80&w=800"
+              src="/dagaa_special.png"
               alt="Dagaa wa Kukaanga na Ugali wa Muhogo"
               width={420}
               height={320}
               className="hero-image"
               priority
-              unoptimized
             />
           </div>
         </div>
