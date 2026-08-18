@@ -44,7 +44,7 @@ const MENU_ITEMS: MenuItem[] = [
     badges: ["🏆 Bestseller", "🐟 Fresh Catch", "🌶️ Custom Spice"],
     hasUgali: true,
     hasPepper: true,
-    image: "/dagaa_special.png"
+    image: "/dagaa_fried_plate.jpg"
   },
   {
     id: "dagaa-stewed",
@@ -336,7 +336,7 @@ export default function Home() {
           </div>
           <div className="hero-image-container">
             <Image
-              src="/dagaa_special.png"
+              src="/dagaa_fried_plate.jpg"
               alt="Dagaa wa Kukaanga na Ugali wa Muhogo"
               width={420}
               height={320}
