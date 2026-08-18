@@ -23,6 +23,7 @@ interface MenuItem {
   badges: string[];
   hasUgali: boolean;
   hasPepper: boolean;
+  image: string;
 }
 
 interface Review {
@@ -43,6 +44,7 @@ const MENU_ITEMS: MenuItem[] = [
     badges: ["🏆 Bestseller", "🐟 Fresh Catch", "🌶️ Custom Spice"],
     hasUgali: true,
     hasPepper: true,
+    image: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Traditional_Vegetables%28Mrenda%29_with_Omena%28fish%29_delicacy_from_Kenya.jpg"
   },
   {
     id: "dagaa-stewed",
@@ -53,6 +55,7 @@ const MENU_ITEMS: MenuItem[] = [
     badges: ["🔥 Slow Cooked", "🍲 Savory Gravy"],
     hasUgali: true,
     hasPepper: true,
+    image: "https://upload.wikimedia.org/wikipedia/commons/2/27/Ugali_%26_Samaki.jpg"
   },
   {
     id: "madafu",
@@ -63,6 +66,7 @@ const MENU_ITEMS: MenuItem[] = [
     badges: ["🥥 Natural", "🧊 Served Cold"],
     hasUgali: false,
     hasPepper: false,
+    image: "https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&q=80&w=800"
   },
   {
     id: "chai-tangawizi",
@@ -73,6 +77,7 @@ const MENU_ITEMS: MenuItem[] = [
     badges: ["☕ Hot Brew", "🌱 Immune Boost"],
     hasUgali: false,
     hasPepper: false,
+    image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&q=80&w=800"
   }
 ];
 
@@ -331,12 +336,13 @@ export default function Home() {
           </div>
           <div className="hero-image-container">
             <Image
-              src="/dagaa_special.png"
+              src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Traditional_Vegetables%28Mrenda%29_with_Omena%28fish%29_delicacy_from_Kenya.jpg"
               alt="Dagaa wa Kukaanga na Ugali wa Muhogo"
               width={420}
               height={320}
               className="hero-image"
               priority
+              unoptimized
             />
           </div>
         </div>
@@ -435,10 +441,11 @@ export default function Home() {
               <div className="menu-card" key={item.id}>
                 <div className="menu-card-image">
                   <Image
-                    src="/dagaa_special.png"
+                    src={item.image}
                     alt={item.title}
                     fill
                     style={{ objectFit: "cover" }}
+                    unoptimized
                   />
                 </div>
                 <div className="menu-card-content">
