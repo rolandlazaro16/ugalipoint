@@ -19,7 +19,7 @@ interface MenuItem {
   title: string;
   description: string;
   basePrice: number;
-  category: "dagaa" | "drinks";
+  category: "dagaa" | "drinks" | "sides";
   badges: string[];
   hasUgali: boolean;
   hasPepper: boolean;
@@ -69,15 +69,15 @@ const MENU_ITEMS: MenuItem[] = [
     image: "/madafu.jpg"
   },
   {
-    id: "chai-tangawizi",
-    title: "Chai ya Tangawizi (Spiced Tea)",
-    description: "Authentic hot black tea brewed with fresh, crushed local ginger root, lemongrass, and cardamom. Perfect for digestion.",
-    basePrice: 2000,
-    category: "drinks",
-    badges: ["☕ Hot Brew", "🌱 Immune Boost"],
+    id: "pilipili-kukaanga",
+    title: "Pilipili ya Kukaanga (Cooked Pepper)",
+    description: "Traditional Swahili hot chili peppers sautéed with onions, garlic, and local spices. The perfect fiery addition to spice up your Dagaa and Ugali.",
+    basePrice: 1500,
+    category: "sides",
+    badges: ["🌶️ Fiery Hot", "🔥 Sautéed Extra"],
     hasUgali: false,
     hasPepper: false,
-    image: "/chai_tangawizi.jpg"
+    image: "/pilipili_kukaanga.jpg"
   }
 ];
 
@@ -107,7 +107,7 @@ const INITIAL_REVIEWS: Review[] = [
 
 export default function Home() {
   // Category Filter
-  const [category, setCategory] = useState<"all" | "dagaa" | "drinks">("all");
+  const [category, setCategory] = useState<"all" | "dagaa" | "drinks" | "sides">("all");
 
   // Customization States (keyed by Item ID)
   const [portions, setPortions] = useState<Record<string, string>>({
@@ -424,13 +424,13 @@ export default function Home() {
 
           {/* Menu Categories */}
           <div className="category-filters">
-            {(["all", "dagaa", "drinks"] as const).map((cat) => (
+            {(["all", "dagaa", "drinks", "sides"] as const).map((cat) => (
               <button
                 key={cat}
                 className={`filter-btn ${category === cat ? "active" : ""}`}
                 onClick={() => setCategory(cat)}
               >
-                {cat === "all" ? "All Items" : cat === "dagaa" ? "Dagaa Specials" : "Refreshments"}
+                {cat === "all" ? "All Items" : cat === "dagaa" ? "Dagaa Specials" : cat === "drinks" ? "Refreshments" : "Sides & Extras"}
               </button>
             ))}
           </div>
