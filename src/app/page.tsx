@@ -71,8 +71,8 @@ const MENU_ITEMS: MenuItem[] = [
   {
     id: "pilipili-kukaanga",
     title: "Pilipili ya Kukaanga (Cooked Pepper)",
-    description: "Traditional Swahili hot chili peppers sautéed with onions, garlic, and local spices. The perfect fiery addition to spice up your Dagaa and Ugali.",
-    basePrice: 1500,
+    description: "Traditional Swahili hot chili peppers sautéed with onions, garlic, and local spices. Free with any food order to spice up your Dagaa and Ugali.",
+    basePrice: 0,
     category: "sides",
     badges: ["🌶️ Fiery Hot", "🔥 Sautéed Extra"],
     hasUgali: false,
@@ -513,7 +513,7 @@ export default function Home() {
                   )}
 
                   <div className="menu-card-footer">
-                    <div className="price">{getPrice(item).toLocaleString()} TSh</div>
+                    <div className="price">{getPrice(item) === 0 ? "FREE" : `${getPrice(item).toLocaleString()} TSh`}</div>
                     <button className="btn-order" onClick={() => addToCart(item)}>
                       Add to Plate
                     </button>
@@ -624,7 +624,7 @@ export default function Home() {
                     Ugali: {item.ugaliType}
                   </div>
                   <div className="cart-item-price">
-                    {(item.price * item.quantity).toLocaleString()} TSh
+                    {item.price === 0 ? "FREE" : `${(item.price * item.quantity).toLocaleString()} TSh`}
                   </div>
                 </div>
                 
@@ -710,7 +710,7 @@ export default function Home() {
                 {cart.map((item) => (
                   <div key={item.id} className="checkout-summary-item">
                     <span>{item.title} ({item.quantity}x)</span>
-                    <span>{(item.price * item.quantity).toLocaleString()} TSh</span>
+                    <span>{item.price === 0 ? "FREE" : `${(item.price * item.quantity).toLocaleString()} TSh`}</span>
                   </div>
                 ))}
                 <div className="checkout-summary-total">
