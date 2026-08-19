@@ -8,17 +8,19 @@ interface Order {
   name: string;
   phone: string;
   quantity: number;
+  date: string;
   time: string;
-  status: "Received" | "Preparing" | "On the Way" | "Delivered";
+  status: "Received" | "Confirmed";
 }
 
 export default function Home() {
-  const [view, setView] = useState<"home" | "orders">("home");
+  const [view, setView] = useState<"home" | "orders" | "chef">("home");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [orders, setOrders] = useState<Order[]>([]);
-  const [toasts, setToasts] = useState<{ id: string; message: string }[]>([]);
+  const [showOrderPopup, setShowOrderPopup] = useState(false);
+  const [lastSubmittedOrder, setLastSubmittedOrder] = useState<Order | null>(null);
 
   // Load orders from localStorage on mount
   useEffect(() => {
@@ -32,59 +34,112 @@ export default function Home() {
     }
   }, []);
 
-  const showNotification = (message: string) => {
-    const id = `toast-${Date.now()}`;
-    setToasts((prev) => [...prev, { id, message }]);
-    setTimeout(() => {
-      setToasts((prev) => prev.filter((t) => t.id !== id));
-    }, 4000);
+  const saveOrders = (updatedOrders: Order[]) => {
+    setOrders(updatedOrders);
+    localStorage.setItem("ugalipoint_orders", JSON.stringify(updatedOrders));
   };
 
   const handleOrderSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !phone.trim() || quantity <= 0) {
-      showNotification("⚠️ Tafadhali jaza taarifa zote kwa usahihi.");
+      alert("Tafadhali jaza taarifa zote kwa usahihi.");
       return;
     }
+
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString("sw-TZ", { day: "numeric", month: "short", year: "numeric" });
+    const formattedTime = now.toLocaleTimeString("sw-TZ", { hour: "2-digit", minute: "2-digit" });
 
     const newOrder: Order = {
       id: `order-${Date.now()}`,
       name,
       phone,
       quantity,
-      time: new Date().toLocaleTimeString("sw-TZ", { hour: "2-digit", minute: "2-digit" }),
+      date: formattedDate,
+      time: formattedTime,
       status: "Received"
     };
 
     const updatedOrders = [newOrder, ...orders];
-    setOrders(updatedOrders);
-    localStorage.setItem("ugalipoint_orders", JSON.stringify(updatedOrders));
+    saveOrders(updatedOrders);
+    setLastSubmittedOrder(newOrder);
 
-    showNotification("✅ Oda yako imepokelewa! Karibu sana.");
+    // Show popup
+    setShowOrderPopup(true);
+
+    // Reset inputs
     setName("");
     setPhone("");
     setQuantity(1);
-    setView("orders"); // Switch to My Order view to show requested order
   };
+
+  // Chef Actions
+  const handleApproveOrder = (orderId: string) => {
+    const updated = orders.map((o) => {
+      if (o.id === orderId) {
+        return { ...o, status: "Confirmed" as const };
+      }
+      return o;
+    });
+    saveOrders(updated);
+  };
+
+  const handleDeleteOrder = (orderId: string) => {
+    const updated = orders.filter((o) => o.id !== orderId);
+    saveOrders(updated);
+  };
+
+  const currentOrders = orders.filter((o) => o.status === "Received");
+  const previousOrders = orders.filter((o) => o.status === "Confirmed");
 
   return (
     <div className="app-container">
-      {/* Toast Notifications */}
-      <div className="toast-container">
-        {toasts.map((t) => (
-          <div key={t.id} className="toast show">
-            <span>ℹ️</span> {t.message}
+      {/* custom order submitted popup */}
+      {showOrderPopup && (
+        <div className="popup-backdrop">
+          <div className="popup-box fade-in">
+            <span className="popup-icon">🎉</span>
+            <h2>Order submitted</h2>
+            {lastSubmittedOrder && (
+              <div className="popup-details">
+                <p><strong>Mteja:</strong> {lastSubmittedOrder.name}</p>
+                <p><strong>Idadi:</strong> {lastSubmittedOrder.quantity} x Ugali wa Moto na Dagaa</p>
+                <p className="popup-time">{lastSubmittedOrder.date} saa {lastSubmittedOrder.time}</p>
+              </div>
+            )}
+            <button 
+              className="btn-popup-close" 
+              onClick={() => {
+                setShowOrderPopup(false);
+                setView("orders"); // Switch to My Order view to show requested order
+              }}
+            >
+              Sawa
+            </button>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
 
       {/* Top Header */}
       <header className="top-header">
-        <div className="logo-circle">
+        <div className="logo-circle" onClick={() => setView("home")} style={{ cursor: "pointer" }}>
           <span>🍛</span>
         </div>
-        <div className="profile-circle" title="User Profile">
-          <span>👤</span>
+        <div className="header-profiles">
+          <button 
+            className={`chef-profile-btn ${view === "chef" ? "active" : ""}`}
+            onClick={() => setView("chef")}
+            title="Chief Cooker Dashboard"
+          >
+            <span>👨‍🍳 Chef</span>
+          </button>
+          <div 
+            className={`profile-circle ${view === "orders" ? "active" : ""}`} 
+            onClick={() => setView("orders")}
+            title="My Orders"
+          >
+            <span>👤</span>
+          </div>
         </div>
       </header>
 
@@ -168,7 +223,7 @@ export default function Home() {
               </button>
             </form>
           </div>
-        ) : (
+        ) : view === "orders" ? (
           <div className="orders-view fade-in">
             <h2 className="view-title">My Orders</h2>
             {orders.length === 0 ? (
@@ -184,9 +239,9 @@ export default function Home() {
                 {orders.map((order) => (
                   <div key={order.id} className="order-card">
                     <div className="order-card-header">
-                      <span className="order-time">Saa: {order.time}</span>
-                      <span className={`order-status ${order.status.toLowerCase().replace(/\s+/g, '-')}`}>
-                        {order.status}
+                      <span className="order-time">{order.date} saa {order.time}</span>
+                      <span className={`order-status ${order.status.toLowerCase()}`}>
+                        {order.status === "Received" ? "Inapitiwa" : "Imethibitishwa"}
                       </span>
                     </div>
                     <div className="order-card-body">
@@ -198,6 +253,84 @@ export default function Home() {
                 ))}
               </div>
             )}
+          </div>
+        ) : (
+          /* Chief Cooker Dashboard View */
+          <div className="chef-view fade-in">
+            <h2 className="view-title">Chef Dashboard 👨‍🍳</h2>
+            <div className="dashboard-grid">
+              
+              {/* Left Column: Current Order */}
+              <div className="dashboard-column">
+                <h3 className="column-title label-current">Current Order</h3>
+                <div className="orders-list">
+                  {currentOrders.length === 0 ? (
+                    <p className="no-orders-msg">Hakuna oda mpya kwa sasa.</p>
+                  ) : (
+                    currentOrders.map((order) => (
+                      <div key={order.id} className="chef-order-card">
+                        <div className="chef-order-time">
+                          <span>📅 {order.date}</span>
+                          <span>⏰ {order.time}</span>
+                        </div>
+                        <div className="chef-order-details">
+                          <p><strong>Mteja:</strong> {order.name}</p>
+                          <p><strong>Simu:</strong> {order.phone}</p>
+                          <p><strong>Idadi:</strong> {order.quantity} x Ugali wa Moto</p>
+                        </div>
+                        <div className="chef-order-actions">
+                          <button 
+                            className="btn-chef-approve"
+                            onClick={() => handleApproveOrder(order.id)}
+                          >
+                            Approve
+                          </button>
+                          <button 
+                            className="btn-chef-delete"
+                            onClick={() => handleDeleteOrder(order.id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+
+              {/* Right Column: Previous Order */}
+              <div className="dashboard-column">
+                <h3 className="column-title label-previous">Previous Order</h3>
+                <div className="orders-list">
+                  {previousOrders.length === 0 ? (
+                    <p className="no-orders-msg">Hakuna oda zilizopita bado.</p>
+                  ) : (
+                    previousOrders.map((order) => (
+                      <div key={order.id} className="chef-order-card previous">
+                        <div className="chef-order-time">
+                          <span>📅 {order.date}</span>
+                          <span>⏰ {order.time}</span>
+                        </div>
+                        <div className="chef-order-details">
+                          <p><strong>Mteja:</strong> {order.name}</p>
+                          <p><strong>Simu:</strong> {order.phone}</p>
+                          <p><strong>Idadi:</strong> {order.quantity} x Ugali wa Moto</p>
+                        </div>
+                        <div className="chef-order-actions">
+                          <button 
+                            className="btn-chef-delete"
+                            onClick={() => handleDeleteOrder(order.id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+
+            </div>
           </div>
         )}
       </main>

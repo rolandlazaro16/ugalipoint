@@ -38,7 +38,7 @@ body {
 
 .app-container {
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
   background-color: var(--color-card-light);
   border-radius: 32px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
@@ -77,6 +77,40 @@ body {
   border: 2px solid var(--color-primary);
 }
 
+.header-profiles {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chef-profile-btn {
+  background-color: #fafaf9;
+  color: #374151;
+  border: 1px solid var(--color-border-light);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .chef-profile-btn {
+    background-color: #111827;
+    color: #e5e7eb;
+    border-color: var(--color-border-dark);
+  }
+}
+
+.chef-profile-btn:hover, .chef-profile-btn.active {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
 .profile-circle {
   width: 50px;
   height: 50px;
@@ -92,8 +126,9 @@ body {
   transition: transform 0.2s ease;
 }
 
-.profile-circle:hover {
+.profile-circle:hover, .profile-circle.active {
   transform: scale(1.05);
+  border-color: var(--color-primary);
 }
 
 /* Navigation Row */
@@ -363,6 +398,14 @@ body {
   font-weight: 700;
   padding: 4px 8px;
   border-radius: 8px;
+}
+
+.order-status.received {
+  background-color: #ffedd5;
+  color: #c2410c;
+}
+
+.order-status.confirmed {
   background-color: #dcfce7;
   color: #15803d;
 }
@@ -370,6 +413,227 @@ body {
 .order-card-body p {
   font-size: 15px;
   line-height: 1.6;
+}
+
+/* Chef Dashboard Styles */
+.chef-view {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dashboard-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #fcfcfb;
+  border: 1px solid var(--color-border-light);
+  padding: 16px;
+  border-radius: 20px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dashboard-column {
+    background-color: #111827;
+    border-color: var(--color-border-dark);
+  }
+}
+
+.column-title {
+  font-size: 18px;
+  font-weight: 800;
+  border-bottom: 2px solid var(--color-border-light);
+  padding-bottom: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .column-title {
+    border-color: var(--color-border-dark);
+  }
+}
+
+.label-current {
+  color: var(--color-primary);
+}
+
+.label-previous {
+  color: #15803d;
+}
+
+.no-orders-msg {
+  font-size: 14px;
+  opacity: 0.6;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* Chef Order Card */
+.chef-order-card {
+  background-color: white;
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  .chef-order-card {
+    background-color: #1f2937;
+    border-color: var(--color-border-dark);
+  }
+}
+
+.chef-order-time {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.chef-order-details p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.chef-order-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-chef-approve {
+  flex: 1;
+  background-color: #15803d;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-chef-approve:hover {
+  background-color: #166534;
+}
+
+.btn-chef-delete {
+  flex: 1;
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-chef-delete:hover {
+  background-color: #b91c1c;
+}
+
+/* Popup / Modal */
+.popup-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-box {
+  background-color: var(--color-card-light);
+  border-radius: 24px;
+  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--color-border-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .popup-box {
+    background-color: var(--color-card-dark);
+    border-color: var(--color-border-dark);
+  }
+}
+
+.popup-icon {
+  font-size: 48px;
+}
+
+.popup-box h2 {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.popup-details {
+  background-color: #f5f5f4;
+  border-radius: 12px;
+  padding: 12px;
+  width: 100%;
+  text-align: left;
+}
+
+@media (prefers-color-scheme: dark) {
+  .popup-details {
+    background-color: #111827;
+  }
+}
+
+.popup-details p {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.popup-time {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+.btn-popup-close {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s;
+}
+
+.btn-popup-close:hover {
+  background-color: var(--color-primary-hover);
 }
 
 /* Animations */
@@ -386,36 +650,4 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* Toast System */
-.toast-container {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  pointer-events: none;
-}
-
-.toast {
-  background-color: #1f2937;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 12px;
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-  font-weight: 600;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.toast.show {
-  opacity: 1;
 }
