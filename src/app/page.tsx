@@ -22,6 +22,11 @@ export default function Home() {
   const [location, setLocation] = useState("");
   const [orders, setOrders] = useState<Order[]>([]);
   
+  // Profile Pictures States
+  const [userProfilePic, setUserProfilePic] = useState("");
+  const [chefProfilePic, setChefProfilePic] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
+
   // Popups & Auth State
   const [showOrderPopup, setShowOrderPopup] = useState(false);
   const [lastSubmittedOrder, setLastSubmittedOrder] = useState<Order | null>(null);
@@ -32,16 +37,22 @@ export default function Home() {
   const [isChefAuthenticated, setIsChefAuthenticated] = useState(false);
   const [loginError, setLoginError] = useState("");
 
-  // Load orders from localStorage on mount
+  // Load orders and profile pics on mount
   useEffect(() => {
-    const saved = localStorage.getItem("ugalipoint_orders");
-    if (saved) {
+    const savedOrders = localStorage.getItem("ugalipoint_orders");
+    if (savedOrders) {
       try {
-        setOrders(JSON.parse(saved));
+        setOrders(JSON.parse(savedOrders));
       } catch (e) {
         console.error(e);
       }
     }
+
+    const savedUserPic = localStorage.getItem("user_profile_pic");
+    if (savedUserPic) setUserProfilePic(savedUserPic);
+
+    const savedChefPic = localStorage.getItem("chef_profile_pic");
+    if (savedChefPic) setChefProfilePic(savedChefPic);
   }, []);
 
   const saveOrders = (updatedOrders: Order[]) => {
@@ -126,6 +137,43 @@ export default function Home() {
   const handleChefLogout = () => {
     setIsChefAuthenticated(false);
     setView("home");
+  };
+
+  // Profile Picture Upload Handler
+  const handleProfilePicUpload = async (e: React.ChangeEvent<HTMLInputElement>, role: "user" | "chef") => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        throw new Error("Upload failed");
+      }
+
+      const data = await res.json();
+      if (data.url) {
+        if (role === "user") {
+          setUserProfilePic(data.url);
+          localStorage.setItem("user_profile_pic", data.url);
+        } else {
+          setChefProfilePic(data.url);
+          localStorage.setItem("chef_profile_pic", data.url);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Kupakia picha kulifeli. Tafadhali jaribu tena.");
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const currentOrders = orders.filter((o) => o.status === "Received");
@@ -213,14 +261,22 @@ export default function Home() {
             onClick={handleChefClick}
             title="Chief Cooker Dashboard"
           >
-            <span>👨‍🍳 Chef</span>
+            {chefProfilePic ? (
+              <img src={chefProfilePic} alt="Chef Profile" className="chef-header-img" />
+            ) : (
+              <span>👨‍🍳 Chef</span>
+            )}
           </button>
           <div 
             className={`profile-circle ${view === "orders" ? "active" : ""}`} 
             onClick={() => setView("orders")}
             title="My Orders"
           >
-            <span>👤</span>
+            {userProfilePic ? (
+              <img src={userProfilePic} alt="User Profile" className="user-header-img" />
+            ) : (
+              <span>👤</span>
+            )}
           </div>
         </div>
       </header>
@@ -317,6 +373,31 @@ export default function Home() {
           </div>
         ) : view === "orders" ? (
           <div className="orders-view fade-in">
+            {/* Profile Pic Card in User Profile View */}
+            <div className="profile-section-card">
+              <div className="profile-avatar-container">
+                {userProfilePic ? (
+                  <img src={userProfilePic} alt="User Avatar" className="profile-avatar-img" />
+                ) : (
+                  <span className="profile-avatar-placeholder">👤</span>
+                )}
+                <label className="upload-avatar-label">
+                  {isUploading ? "..." : "Badili"}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleProfilePicUpload(e, "user")}
+                    style={{ display: "none" }}
+                    disabled={isUploading}
+                  />
+                </label>
+              </div>
+              <div className="profile-text">
+                <h3>Wasifu wa Mteja</h3>
+                <p>Pakia picha yako hapa ili ionekane kwenye wasifu wako.</p>
+              </div>
+            </div>
+
             <h2 className="view-title">My Orders</h2>
             {orders.length === 0 ? (
               <div className="empty-state">
@@ -350,8 +431,33 @@ export default function Home() {
         ) : (
           /* Chief Cooker Dashboard View */
           <div className="chef-view fade-in">
+            {/* Profile Pic Card in Chef View */}
+            <div className="profile-section-card chef-theme">
+              <div className="profile-avatar-container">
+                {chefProfilePic ? (
+                  <img src={chefProfilePic} alt="Chef Avatar" className="profile-avatar-img" />
+                ) : (
+                  <span className="profile-avatar-placeholder">👨‍🍳</span>
+                )}
+                <label className="upload-avatar-label">
+                  {isUploading ? "..." : "Badili"}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleProfilePicUpload(e, "chef")}
+                    style={{ display: "none" }}
+                    disabled={isUploading}
+                  />
+                </label>
+              </div>
+              <div className="profile-text">
+                <h3>Chef Profile 👨‍🍳</h3>
+                <p>Pakia picha yako ya Uchef ili ionekane kwenye dashibodi.</p>
+              </div>
+            </div>
+
             <div className="chef-view-header">
-              <h2 className="view-title">Chef Dashboard 👨‍🍳</h2>
+              <h2 className="view-title">Chef Dashboard</h2>
               <button className="btn-chef-logout" onClick={handleChefLogout}>
                 Logout
               </button>

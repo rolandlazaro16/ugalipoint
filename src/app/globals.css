@@ -87,14 +87,17 @@ body {
   background-color: #fafaf9;
   color: #374151;
   border: 1px solid var(--color-border-light);
-  padding: 8px 16px;
-  border-radius: 20px;
+  height: 50px;
+  padding: 0 16px;
+  border-radius: 25px;
   font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   transition: all 0.2s ease;
+  overflow: hidden;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -111,6 +114,13 @@ body {
   border-color: var(--color-primary);
 }
 
+.chef-header-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin: 0 -16px; /* Expand to fill button */
+}
+
 .profile-circle {
   width: 50px;
   height: 50px;
@@ -124,11 +134,18 @@ body {
   border: 2px solid #0ea5e9;
   cursor: pointer;
   transition: transform 0.2s ease;
+  overflow: hidden;
 }
 
 .profile-circle:hover, .profile-circle.active {
   transform: scale(1.05);
   border-color: var(--color-primary);
+}
+
+.user-header-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Navigation Row */
@@ -283,16 +300,6 @@ body {
   border-color: var(--color-primary);
 }
 
-.quantity-group {
-  max-width: 50%;
-}
-
-@media (max-width: 480px) {
-  .quantity-group {
-    max-width: 100%;
-  }
-}
-
 .btn-order-now {
   background-color: var(--color-primary);
   color: white;
@@ -313,6 +320,87 @@ body {
 
 .btn-order-now:active {
   transform: translateY(0);
+}
+
+/* Profile Section Card (Chef and User View) */
+.profile-section-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 1px solid #bbf7d0;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+
+.profile-section-card.chef-theme {
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  border-color: #fed7aa;
+}
+
+@media (prefers-color-scheme: dark) {
+  .profile-section-card {
+    background: linear-gradient(135deg, rgba(21, 128, 61, 0.1) 0%, rgba(21, 128, 61, 0.2) 100%);
+    border-color: rgba(21, 128, 61, 0.3);
+  }
+  .profile-section-card.chef-theme {
+    background: linear-gradient(135deg, rgba(234, 88, 12, 0.1) 0%, rgba(234, 88, 12, 0.2) 100%);
+    border-color: rgba(234, 88, 12, 0.3);
+  }
+}
+
+.profile-avatar-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 3px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-avatar-placeholder {
+  font-size: 40px;
+}
+
+.upload-avatar-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  text-align: center;
+  padding: 4px 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.upload-avatar-label:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.profile-text h3 {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.profile-text p {
+  font-size: 13px;
+  opacity: 0.8;
 }
 
 /* Orders View */
