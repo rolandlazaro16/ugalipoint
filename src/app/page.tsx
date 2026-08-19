@@ -19,7 +19,7 @@ interface MenuItem {
   title: string;
   description: string;
   basePrice: number;
-  category: "dagaa" | "drinks" | "sides";
+  category: "dagaa" | "sides";
   badges: string[];
   hasUgali: boolean;
   hasPepper: boolean;
@@ -58,15 +58,15 @@ const MENU_ITEMS: MenuItem[] = [
     image: "/dagaa_stewed.jpg"
   },
   {
-    id: "madafu",
-    title: "Madafu ya Baridi",
-    description: "Freshly harvested organic coconut water served ice-cold inside the whole green coconut shell. The ultimate refreshing hydrator.",
-    basePrice: 3500,
-    category: "drinks",
-    badges: ["🥥 Natural", "🧊 Served Cold"],
-    hasUgali: false,
-    hasPepper: false,
-    image: "/madafu.jpg"
+    id: "dagaa-roast",
+    title: "Dagaa wa Kuchoma (Roasted Dagaa)",
+    description: "Charcoal-roasted fresh Lake Victoria sardines, lightly seasoned with garlic and sea salt, served with a side of freshly sautéed local spinach (mchicha) and a hot block of Cassava & Cereal Grains Ugali.",
+    basePrice: 8500,
+    category: "dagaa",
+    badges: ["🔥 Charcoal Grilled", "🥬 Iron Rich"],
+    hasUgali: true,
+    hasPepper: true,
+    image: "/dagaa_roast_mchicha_v2.jpg"
   },
   {
     id: "pilipili-kukaanga",
@@ -107,16 +107,18 @@ const INITIAL_REVIEWS: Review[] = [
 
 export default function Home() {
   // Category Filter
-  const [category, setCategory] = useState<"all" | "dagaa" | "drinks" | "sides">("all");
+  const [category, setCategory] = useState<"all" | "dagaa" | "sides">("all");
 
   // Customization States (keyed by Item ID)
   const [portions, setPortions] = useState<Record<string, string>>({
     "dagaa-fried": "Single",
     "dagaa-stewed": "Single",
+    "dagaa-roast": "Single",
   });
   const [peppers, setPeppers] = useState<Record<string, string>>({
     "dagaa-fried": "Medium",
     "dagaa-stewed": "Medium",
+    "dagaa-roast": "Medium",
   });
 
   // Cart State
@@ -424,13 +426,13 @@ export default function Home() {
 
           {/* Menu Categories */}
           <div className="category-filters">
-            {(["all", "dagaa", "drinks", "sides"] as const).map((cat) => (
+            {(["all", "dagaa", "sides"] as const).map((cat) => (
               <button
                 key={cat}
                 className={`filter-btn ${category === cat ? "active" : ""}`}
                 onClick={() => setCategory(cat)}
               >
-                {cat === "all" ? "All Items" : cat === "dagaa" ? "Dagaa Specials" : cat === "drinks" ? "Refreshments" : "Sides & Extras"}
+                {cat === "all" ? "All Items" : cat === "dagaa" ? "Dagaa Specials" : "Sides & Extras"}
               </button>
             ))}
           </div>
