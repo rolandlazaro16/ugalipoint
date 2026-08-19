@@ -8,6 +8,7 @@ interface Order {
   name: string;
   phone: string;
   quantity: number;
+  location: string;
   date: string;
   time: string;
   status: "Received" | "Confirmed";
@@ -18,6 +19,7 @@ export default function Home() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [quantity, setQuantity] = useState(1);
+  const [location, setLocation] = useState("");
   const [orders, setOrders] = useState<Order[]>([]);
   
   // Popups & Auth State
@@ -49,7 +51,7 @@ export default function Home() {
 
   const handleOrderSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !phone.trim() || quantity <= 0) {
+    if (!name.trim() || !phone.trim() || !location.trim() || quantity <= 0) {
       alert("Tafadhali jaza taarifa zote kwa usahihi.");
       return;
     }
@@ -63,6 +65,7 @@ export default function Home() {
       name,
       phone,
       quantity,
+      location,
       date: formattedDate,
       time: formattedTime,
       status: "Received"
@@ -79,6 +82,7 @@ export default function Home() {
     setName("");
     setPhone("");
     setQuantity(1);
+    setLocation("");
   };
 
   // Chef Actions
@@ -140,7 +144,9 @@ export default function Home() {
             {lastSubmittedOrder && (
               <div className="popup-details">
                 <p><strong>Mteja:</strong> {lastSubmittedOrder.name}</p>
+                <p><strong>Simu:</strong> {lastSubmittedOrder.phone}</p>
                 <p><strong>Idadi:</strong> {lastSubmittedOrder.quantity} x Ugali wa Moto na Dagaa</p>
+                <p><strong>Mahali:</strong> {lastSubmittedOrder.location}</p>
                 <p className="popup-time">{lastSubmittedOrder.date} saa {lastSubmittedOrder.time}</p>
               </div>
             )}
@@ -281,19 +287,29 @@ export default function Home() {
                     required
                   />
                 </div>
-              </div>
-
-              <div className="form-group quantity-group">
-                <label htmlFor="quantity-input">Quantity</label>
-                <input
-                  id="quantity-input"
-                  type="number"
-                  min="1"
-                  max="50"
-                  value={quantity}
-                  onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
-                  required
-                />
+                <div className="form-group">
+                  <label htmlFor="quantity-input">Quantity</label>
+                  <input
+                    id="quantity-input"
+                    type="number"
+                    min="1"
+                    max="50"
+                    value={quantity}
+                    onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="location-input">Location</label>
+                  <input
+                    id="location-input"
+                    type="text"
+                    placeholder="Mahali unapoishi"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    required
+                  />
+                </div>
               </div>
 
               <button type="submit" className="btn-order-now">
@@ -326,6 +342,7 @@ export default function Home() {
                       <p><strong>Mteja:</strong> {order.name}</p>
                       <p><strong>Simu:</strong> {order.phone}</p>
                       <p><strong>Idadi:</strong> {order.quantity} x Ugali wa Moto na Dagaa</p>
+                      <p><strong>Mahali:</strong> {order.location}</p>
                     </div>
                   </div>
                 ))}
@@ -360,13 +377,14 @@ export default function Home() {
                           <p><strong>Mteja:</strong> {order.name}</p>
                           <p><strong>Simu:</strong> {order.phone}</p>
                           <p><strong>Idadi:</strong> {order.quantity} x Ugali wa Moto</p>
+                          <p><strong>Mahali:</strong> {order.location}</p>
                         </div>
                         <div className="chef-order-actions">
                           <button 
                             className="btn-chef-approve"
                             onClick={() => handleApproveOrder(order.id)}
                           >
-                            Approve
+                            Confirm
                           </button>
                           <button 
                             className="btn-chef-delete"
@@ -398,6 +416,7 @@ export default function Home() {
                           <p><strong>Mteja:</strong> {order.name}</p>
                           <p><strong>Simu:</strong> {order.phone}</p>
                           <p><strong>Idadi:</strong> {order.quantity} x Ugali wa Moto</p>
+                          <p><strong>Mahali:</strong> {order.location}</p>
                         </div>
                         <div className="chef-order-actions">
                           <button 
