@@ -103,9 +103,7 @@ export default function Home() {
 
   const handleChefLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Normalize both lowercase letter 'o' and digit '0' to be safe
-    const normalizedPhone = chefPhone.trim().replace(/^0/, "o");
-    if ((normalizedPhone === "o675217216" || chefPhone.trim() === "0675217216") && chefPassword === "muro2548") {
+    if (chefPhone.trim() === "0675217216" && chefPassword === "muro2548") {
       setIsChefAuthenticated(true);
       setShowChefLogin(false);
       setView("chef");
