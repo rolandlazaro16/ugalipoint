@@ -37,8 +37,8 @@ interface Review {
 const MENU_ITEMS: MenuItem[] = [
   {
     id: "dagaa-fried",
-    title: "Dagaa wa Kukaanga Special (Fried)",
-    description: "Dagaa wakavu watamu wa kukaanga kutoka Ziwa Victoria, mboga za majani zilizokaangwa (mchicha/kisamvu), nyanya, vitunguu maji, na kachumbari yenye pilipili mbichi. Huandaliwa na ugali moto wa muhogo na nafaka.",
+    title: "Dagaa roast na ugali",
+    description: "Dagaa watamu wa kukaanga kutoka Ziwa Victoria waliopikwa kwa mchanganyiko wa viungo na nyanya, wakisindikizwa na mboga safi za majani (mchicha/kisamvu) pamoja na ugali moto wa muhogo na nafaka.",
     basePrice: 8500,
     category: "dagaa",
     badges: ["🏆 Bestseller", "🐟 Fresh Catch", "🌶️ Custom Spice"],
@@ -59,7 +59,7 @@ const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: "dagaa-roast",
-    title: "Dagaa Roast na Ugali",
+    title: "Dagaa Wakavu",
     description: "Dagaa wakavu wa kukaanga kutoka Ziwa Victoria waliokolezwa kitunguu saumu na chumvi, wakiandaliwa na ugali moto wa muhogo na nafaka na kipande cha ndimu.",
     basePrice: 8500,
     category: "dagaa",
