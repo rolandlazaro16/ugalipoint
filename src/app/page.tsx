@@ -173,7 +173,7 @@ export default function Home() {
                 <label>Phone Number</label>
                 <input
                   type="text"
-                  placeholder="e.g. o675217216"
+                  placeholder="e.g. 0675217216"
                   value={chefPhone}
                   onChange={(e) => setChefPhone(e.target.value)}
                   required
