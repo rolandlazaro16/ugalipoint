@@ -38,7 +38,7 @@ const MENU_ITEMS: MenuItem[] = [
   {
     id: "dagaa-fried",
     title: "Dagaa wa Kukaanga Special (Fried)",
-    description: "Crispy deep-fried fresh Lake Victoria sardines, sautéed local leafy greens (kisamvu/mchicha), ripe tomatoes, red onions, and hot green pepper salad. Served with a piping hot block of our signature Cassava and Cereal Grains Ugali.",
+    description: "Dagaa wakavu watamu wa kukaanga kutoka Ziwa Victoria, mboga za majani zilizokaangwa (mchicha/kisamvu), nyanya, vitunguu maji, na kachumbari yenye pilipili mbichi. Huandaliwa na ugali moto wa muhogo na nafaka.",
     basePrice: 8500,
     category: "dagaa",
     badges: ["🏆 Bestseller", "🐟 Fresh Catch", "🌶️ Custom Spice"],
@@ -49,7 +49,7 @@ const MENU_ITEMS: MenuItem[] = [
   {
     id: "dagaa-stewed",
     title: "Dagaa wa Mchuzi Special (Stewed)",
-    description: "Savory simmered fresh Lake Victoria sardines in a rich, aromatic tomato, garlic, onion, and herb reduction. Served with sautéed local greens and a hot block of our signature Cassava and Cereal Grains Ugali.",
+    description: "Mchuzi mtamu wa dagaa wabichi kutoka Ziwa Victoria uliochemshwa kwa nyanya, kitunguu saumu, kitunguu maji na viungo mbalimbali. Huandaliwa na mboga za majani na ugali moto wa muhogo na nafaka.",
     basePrice: 9000,
     category: "dagaa",
     badges: ["🔥 Slow Cooked", "🍲 Savory Gravy"],
@@ -59,8 +59,8 @@ const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: "dagaa-roast",
-    title: "Dagaa Wakavu",
-    description: "Crispy, dry-fried fresh Lake Victoria sardines seasoned with garlic and salt, served with a hot block of Cassava & Cereal Grains Ugali and a fresh lemon wedge.",
+    title: "Dagaa Roast na Ugali",
+    description: "Dagaa wakavu wa kukaanga kutoka Ziwa Victoria waliokolezwa kitunguu saumu na chumvi, wakiandaliwa na ugali moto wa muhogo na nafaka na kipande cha ndimu.",
     basePrice: 8500,
     category: "dagaa",
     badges: ["🔥 Crispy Fried", "🍋 Lemon Zest"],
@@ -71,7 +71,7 @@ const MENU_ITEMS: MenuItem[] = [
   {
     id: "pilipili-kukaanga",
     title: "Pilipili ya Kukaanga (Cooked Pepper)",
-    description: "Traditional Swahili hot chili peppers sautéed with onions, garlic, and local spices. Free with any food order to spice up your Dagaa and Ugali.",
+    description: "Pilipili ya kukaanga ya Kiswahili iliyotayarishwa kwa vitunguu, saumu na viungo vya kienyeji. Ni bure unapoagiza chakula chochote ili kunogesha dagaa na ugali wako.",
     basePrice: 0,
     category: "sides",
     badges: ["🌶️ Fiery Hot", "🔥 Sautéed Extra"],
