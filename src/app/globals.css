@@ -422,6 +422,38 @@ body {
   gap: 20px;
 }
 
+.chef-view-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-chef-logout {
+  background-color: transparent;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-chef-logout:hover {
+  background-color: #fef2f2;
+  border-color: #dc2626;
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-chef-logout {
+    border-color: #7f1d1d;
+  }
+  .btn-chef-logout:hover {
+    background-color: #7f1d1d;
+    color: white;
+  }
+}
+
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -633,6 +665,87 @@ body {
 }
 
 .btn-popup-close:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* Chef Login Modal */
+.login-box {
+  max-width: 360px;
+  padding: 24px;
+}
+
+.chef-login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+
+.error-message {
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  background-color: #fef2f2;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #fee2e2;
+}
+
+@media (prefers-color-scheme: dark) {
+  .error-message {
+    background-color: #7f1d1d;
+    color: #fca5a5;
+    border-color: #7f1d1d;
+  }
+}
+
+.login-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.btn-secondary {
+  flex: 1;
+  background-color: transparent;
+  color: #4b5563;
+  border: 1px solid var(--color-border-light);
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: #f5f5f4;
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-secondary {
+    color: #d1d5db;
+    border-color: var(--color-border-dark);
+  }
+  .btn-secondary:hover {
+    background-color: #374151;
+  }
+}
+
+.btn-primary-action {
+  flex: 1;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-primary-action:hover {
   background-color: var(--color-primary-hover);
 }
 

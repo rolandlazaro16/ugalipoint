@@ -19,8 +19,16 @@ export default function Home() {
   const [phone, setPhone] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [orders, setOrders] = useState<Order[]>([]);
+  
+  // Popups & Auth State
   const [showOrderPopup, setShowOrderPopup] = useState(false);
   const [lastSubmittedOrder, setLastSubmittedOrder] = useState<Order | null>(null);
+  
+  const [showChefLogin, setShowChefLogin] = useState(false);
+  const [chefPhone, setChefPhone] = useState("");
+  const [chefPassword, setChefPassword] = useState("");
+  const [isChefAuthenticated, setIsChefAuthenticated] = useState(false);
+  const [loginError, setLoginError] = useState("");
 
   // Load orders from localStorage on mount
   useEffect(() => {
@@ -89,6 +97,35 @@ export default function Home() {
     saveOrders(updated);
   };
 
+  const handleChefLoginSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Normalize both lowercase letter 'o' and digit '0' to be safe
+    const normalizedPhone = chefPhone.trim().replace(/^0/, "o");
+    if ((normalizedPhone === "o675217216" || chefPhone.trim() === "0675217216") && chefPassword === "muro2548") {
+      setIsChefAuthenticated(true);
+      setShowChefLogin(false);
+      setView("chef");
+      setChefPhone("");
+      setChefPassword("");
+      setLoginError("");
+    } else {
+      setLoginError("Namba ya simu au neno la siri sio sahihi!");
+    }
+  };
+
+  const handleChefClick = () => {
+    if (isChefAuthenticated) {
+      setView("chef");
+    } else {
+      setShowChefLogin(true);
+    }
+  };
+
+  const handleChefLogout = () => {
+    setIsChefAuthenticated(false);
+    setView("home");
+  };
+
   const currentOrders = orders.filter((o) => o.status === "Received");
   const previousOrders = orders.filter((o) => o.status === "Confirmed");
 
@@ -120,6 +157,47 @@ export default function Home() {
         </div>
       )}
 
+      {/* Chief Cooker Login Modal */}
+      {showChefLogin && (
+        <div className="popup-backdrop">
+          <div className="popup-box login-box fade-in">
+            <span className="popup-icon">👨‍🍳</span>
+            <h2>Chief Cooker Login</h2>
+            <form onSubmit={handleChefLoginSubmit} className="chef-login-form">
+              {loginError && <p className="error-message">{loginError}</p>}
+              <div className="form-group">
+                <label>Phone Number</label>
+                <input
+                  type="text"
+                  placeholder="e.g. o675217216"
+                  value={chefPhone}
+                  onChange={(e) => setChefPhone(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Password</label>
+                <input
+                  type="password"
+                  placeholder="••••••••"
+                  value={chefPassword}
+                  onChange={(e) => setChefPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="login-actions">
+                <button type="button" className="btn-secondary" onClick={() => setShowChefLogin(false)}>
+                  Cancel
+                </button>
+                <button type="submit" className="btn-primary-action">
+                  Ingia
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       {/* Top Header */}
       <header className="top-header">
         <div className="logo-circle" onClick={() => setView("home")} style={{ cursor: "pointer" }}>
@@ -128,7 +206,7 @@ export default function Home() {
         <div className="header-profiles">
           <button 
             className={`chef-profile-btn ${view === "chef" ? "active" : ""}`}
-            onClick={() => setView("chef")}
+            onClick={handleChefClick}
             title="Chief Cooker Dashboard"
           >
             <span>👨‍🍳 Chef</span>
@@ -257,7 +335,12 @@ export default function Home() {
         ) : (
           /* Chief Cooker Dashboard View */
           <div className="chef-view fade-in">
-            <h2 className="view-title">Chef Dashboard 👨‍🍳</h2>
+            <div className="chef-view-header">
+              <h2 className="view-title">Chef Dashboard 👨‍🍳</h2>
+              <button className="btn-chef-logout" onClick={handleChefLogout}>
+                Logout
+              </button>
+            </div>
             <div className="dashboard-grid">
               
               {/* Left Column: Current Order */}
