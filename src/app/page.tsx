@@ -59,11 +59,11 @@ const MENU_ITEMS: MenuItem[] = [
   },
   {
     id: "dagaa-roast",
-    title: "Dagaa wa Kuchoma (Roasted Dagaa)",
-    description: "Charcoal-roasted fresh Lake Victoria sardines, lightly seasoned with garlic and sea salt, served with a side of freshly sautéed local spinach (mchicha) and a hot block of Cassava & Cereal Grains Ugali.",
+    title: "Dagaa Wakavu",
+    description: "Crispy, dry-fried fresh Lake Victoria sardines seasoned with garlic and salt, served with a hot block of Cassava & Cereal Grains Ugali and a fresh lemon wedge.",
     basePrice: 8500,
     category: "dagaa",
-    badges: ["🔥 Charcoal Grilled", "🥬 Iron Rich"],
+    badges: ["🔥 Crispy Fried", "🍋 Lemon Zest"],
     hasUgali: true,
     hasPepper: true,
     image: "/dagaa_roast_mchicha_v4.jpg"
