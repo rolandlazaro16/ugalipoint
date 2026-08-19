@@ -38,7 +38,7 @@ const MENU_ITEMS: MenuItem[] = [
   {
     id: "dagaa-fried",
     title: "Dagaa roast na ugali",
-    description: "Dagaa watamu wa kukaanga kutoka Ziwa Victoria waliopikwa kwa mchanganyiko wa viungo na nyanya, wakisindikizwa na mboga safi za majani (mchicha/kisamvu) pamoja na ugali moto wa muhogo na nafaka.",
+    description: "Dagaa watamu wa kukaanga kutoka Ziwa Victoria waliopikwa kwa mchanganyiko wa viungo na nyanya, wakisindikizwa na mboga safi za majani (mchicha/kisamvu) pamoja na ugali wa moto wa muhogo na nafaka.",
     basePrice: 8500,
     category: "dagaa",
     badges: ["🏆 Bestseller", "🐟 Fresh Catch", "🌶️ Custom Spice"],
@@ -49,7 +49,7 @@ const MENU_ITEMS: MenuItem[] = [
   {
     id: "dagaa-stewed",
     title: "Dagaa wa Mchuzi Special (Stewed)",
-    description: "Mchuzi mtamu wa dagaa wabichi kutoka Ziwa Victoria uliochemshwa kwa nyanya, kitunguu saumu, kitunguu maji na viungo mbalimbali. Huandaliwa na mboga za majani na ugali moto wa muhogo na nafaka.",
+    description: "Mchuzi mtamu wa dagaa wabichi kutoka Ziwa Victoria uliochemshwa kwa nyanya, kitunguu saumu, kitunguu maji na viungo mbalimbali. Huandaliwa na mboga za majani na ugali wa moto wa muhogo na nafaka.",
     basePrice: 9000,
     category: "dagaa",
     badges: ["🔥 Slow Cooked", "🍲 Savory Gravy"],
@@ -60,7 +60,7 @@ const MENU_ITEMS: MenuItem[] = [
   {
     id: "dagaa-roast",
     title: "Dagaa Wakavu",
-    description: "Dagaa wakavu wa kukaanga kutoka Ziwa Victoria waliokolezwa kitunguu saumu na chumvi, wakiandaliwa na ugali moto wa muhogo na nafaka na kipande cha ndimu.",
+    description: "Dagaa wakavu wa kukaanga kutoka Ziwa Victoria waliokolezwa kitunguu saumu na chumvi, wakiandaliwa na ugali wa moto wa muhogo na nafaka na kipande cha ndimu.",
     basePrice: 8500,
     category: "dagaa",
     badges: ["🔥 Crispy Fried", "🍋 Lemon Zest"],
