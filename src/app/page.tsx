@@ -66,7 +66,7 @@ const MENU_ITEMS: MenuItem[] = [
     badges: ["🔥 Charcoal Grilled", "🥬 Iron Rich"],
     hasUgali: true,
     hasPepper: true,
-    image: "/dagaa_roast_mchicha_v2.jpg"
+    image: "/dagaa_roast_mchicha_v3.jpg"
   },
   {
     id: "pilipili-kukaanga",
