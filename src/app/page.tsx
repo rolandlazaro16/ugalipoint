@@ -255,6 +255,7 @@ export default function Home() {
         <div className="logo-circle" onClick={() => setView("home")} style={{ cursor: "pointer" }}>
           <span>🍛</span>
         </div>
+        <h1 className="app-title" onClick={() => setView("home")} style={{ cursor: "pointer" }}>Ugali Point</h1>
         <div className="header-profiles">
           <button 
             className={`chef-profile-btn ${view === "chef" ? "active" : ""}`}
