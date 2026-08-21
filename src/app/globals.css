@@ -251,7 +251,8 @@ body {
 /* Navigation Row */
 .nav-row {
   display: flex;
-  gap: 12px;
+  justify-content: center;
+  gap: 16px;
   border-bottom: 1px solid #f3f4f6;
   padding-bottom: 10px;
 }
@@ -263,16 +264,16 @@ body {
 }
 
 .nav-btn {
-  flex: 1;
   background-color: transparent;
   color: #6b7280;
   border: none;
   font-size: 15px;
   font-weight: 700;
-  padding: 8px;
+  padding: 8px 24px;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 20px;
   transition: all 0.2s ease;
+  min-width: 120px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -473,6 +474,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .form-grid {
