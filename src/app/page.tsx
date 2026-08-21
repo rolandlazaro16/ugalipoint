@@ -395,7 +395,7 @@ export default function Home() {
 
             {/* Product Details Block */}
             <div className="product-details-container">
-              <h2 className="product-title">Ugali wa Moto na Dagaa</h2>
+              <h2 className="product-title">Ugali Wa Kipekee na Dagaa Watamu</h2>
               <div className="product-badges">
                 <span className="badge-item">Fresh</span>
                 <span className="badge-dot">•</span>
