@@ -84,46 +84,41 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
 }
 
-.app-title {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 26px;
-  font-weight: 900;
+.brand-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.2s ease;
+  user-select: none;
+}
+
+.brand-container:hover {
+  transform: scale(1.02);
+}
+
+.brand-emoji {
+  font-size: 28px;
+}
+
+.brand-name {
+  font-size: 24px;
+  font-weight: 800;
   letter-spacing: -0.5px;
   background: linear-gradient(135deg, var(--color-primary) 0%, #f97316 50%, #f59e0b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-fill-color: transparent;
-  user-select: none;
-  transition: all 0.2s ease;
-}
-
-.app-title:hover {
-  transform: translateX(-50%) scale(1.05);
-}
-
-@media (max-width: 640px) {
-  .app-title {
-    font-size: 22px;
-  }
 }
 
 @media (max-width: 480px) {
-  .app-title {
-    font-size: 18px;
-    position: static;
-    transform: none;
+  .brand-name {
+    font-size: 20px;
   }
-  .app-title:hover {
-    transform: scale(1.05);
-  }
-  .top-header {
-    justify-content: space-between;
+  .brand-emoji {
+    font-size: 24px;
   }
 }
 

@@ -252,10 +252,10 @@ export default function Home() {
 
       {/* Top Header */}
       <header className="top-header">
-        <div className="logo-circle" onClick={() => setView("home")} style={{ cursor: "pointer" }}>
-          <span>🍛</span>
+        <div className="brand-container" onClick={() => setView("home")} style={{ cursor: "pointer" }}>
+          <span className="brand-emoji">🍲</span>
+          <span className="brand-name">Ugali Point</span>
         </div>
-        <h1 className="app-title" onClick={() => setView("home")} style={{ cursor: "pointer" }}>Ugali Point</h1>
         <div className="header-profiles">
           <button 
             className={`chef-profile-btn ${view === "chef" ? "active" : ""}`}
@@ -281,7 +281,7 @@ export default function Home() {
           </div>
         </div>
       </header>
-
+ 
       {/* Navigation Buttons Row */}
       <div className="nav-row">
         <button 
@@ -294,7 +294,7 @@ export default function Home() {
           className={`nav-btn ${view === "orders" ? "active" : ""}`}
           onClick={() => setView("orders")}
         >
-          My Order ({orders.length})
+          🛒 My Order ({orders.length})
         </button>
       </div>
 
