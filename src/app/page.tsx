@@ -113,6 +113,7 @@ export default function Home() {
   const [isChefAuthenticated, setIsChefAuthenticated] = useState(false);
   const [loginError, setLoginError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isProfileSaved, setIsProfileSaved] = useState(false);
 
   // Load orders and profile pics on mount
   useEffect(() => {
@@ -130,6 +131,16 @@ export default function Home() {
 
     const savedChefPic = localStorage.getItem("chef_profile_pic");
     if (savedChefPic) setChefProfilePic(savedChefPic);
+
+    const savedName = localStorage.getItem("user_profile_name");
+    const savedPhone = localStorage.getItem("user_profile_phone");
+    const savedLocation = localStorage.getItem("user_profile_location");
+    if (savedName && savedPhone && savedLocation) {
+      setName(savedName);
+      setPhone(savedPhone);
+      setLocation(savedLocation);
+      setIsProfileSaved(true);
+    }
   }, []);
 
   const saveOrders = (updatedOrders: Order[]) => {
@@ -163,14 +174,17 @@ export default function Home() {
     saveOrders(updatedOrders);
     setLastSubmittedOrder(newOrder);
 
+    // Save profile to local storage and set saved state
+    localStorage.setItem("user_profile_name", name.trim());
+    localStorage.setItem("user_profile_phone", phone.trim());
+    localStorage.setItem("user_profile_location", location.trim());
+    setIsProfileSaved(true);
+
     // Show popup
     setShowOrderPopup(true);
 
-    // Reset inputs
-    setName("");
-    setPhone("");
+    // Reset only the quantity counter (keep name/phone/location for next orders)
     setQuantity(1);
-    setLocation("");
   };
 
   // Chef Actions
@@ -421,61 +435,97 @@ export default function Home() {
 
             {/* Order Form */}
             <form onSubmit={handleOrderSubmit} className="order-form">
-              <div className="form-grid">
-                <div className="form-group">
-                  <label htmlFor="name-input">Name</label>
-                  <input
-                    id="name-input"
-                    type="text"
-                    placeholder="Jina lako"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="phone-input">Phone Number</label>
-                  <input
-                    id="phone-input"
-                    type="tel"
-                    placeholder="Namba ya simu"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Quantity</label>
-                  <div className="quantity-stepper">
+              {isProfileSaved ? (
+                <div className="saved-profile-stepper-container">
+                  <div className="saved-profile-info-summary">
+                    <span className="summary-text">Oda hii itatumwa kwa <strong>{name}</strong> ({phone}, {location})</span>
                     <button 
                       type="button" 
-                      className="stepper-btn" 
-                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      className="btn-edit-profile" 
+                      onClick={() => setIsProfileSaved(false)}
+                      title="Badili Taarifa"
                     >
-                      −
-                    </button>
-                    <span className="stepper-val">{quantity}</span>
-                    <button 
-                      type="button" 
-                      className="stepper-btn" 
-                      onClick={() => setQuantity(quantity + 1)}
-                    >
-                      +
+                      Badili Taarifa
                     </button>
                   </div>
+                  <div className="form-group quantity-only-group">
+                    <label>Quantity</label>
+                    <div className="quantity-stepper">
+                      <button 
+                        type="button" 
+                        className="stepper-btn" 
+                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      >
+                        −
+                      </button>
+                      <span className="stepper-val">{quantity}</span>
+                      <button 
+                        type="button" 
+                        className="stepper-btn" 
+                        onClick={() => setQuantity(quantity + 1)}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="location-input">Location</label>
-                  <input
-                    id="location-input"
-                    type="text"
-                    placeholder="Mahali unapoishi"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    required
-                  />
+              ) : (
+                <div className="form-grid">
+                  <div className="form-group">
+                    <label htmlFor="name-input">Name</label>
+                    <input
+                      id="name-input"
+                      type="text"
+                      placeholder="Jina lako"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="phone-input">Phone Number</label>
+                    <input
+                      id="phone-input"
+                      type="tel"
+                      placeholder="Namba ya simu"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Quantity</label>
+                    <div className="quantity-stepper">
+                      <button 
+                        type="button" 
+                        className="stepper-btn" 
+                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      >
+                        −
+                      </button>
+                      <span className="stepper-val">{quantity}</span>
+                      <button 
+                        type="button" 
+                        className="stepper-btn" 
+                        onClick={() => setQuantity(quantity + 1)}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="location-input">Location</label>
+                    <input
+                      id="location-input"
+                      type="text"
+                      placeholder="Mahali unapoishi"
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
+                      required
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
 
               <button type="submit" className="btn-order-now">
                 ORDER NOW — Tsh {(quantity * 1000).toLocaleString()}
