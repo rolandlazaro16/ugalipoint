@@ -112,6 +112,7 @@ export default function Home() {
   const [chefPassword, setChefPassword] = useState("");
   const [isChefAuthenticated, setIsChefAuthenticated] = useState(false);
   const [loginError, setLoginError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   // Load orders and profile pics on mount
   useEffect(() => {
@@ -197,6 +198,7 @@ export default function Home() {
       setChefPhone("");
       setChefPassword("");
       setLoginError("");
+      setShowPassword(false);
     } else {
       setLoginError("Namba ya simu au neno la siri sio sahihi!");
     }
@@ -207,6 +209,7 @@ export default function Home() {
       setView("chef");
     } else {
       setShowChefLogin(true);
+      setShowPassword(false);
     }
   };
 
@@ -305,16 +308,26 @@ export default function Home() {
               </div>
               <div className="form-group">
                 <label>Password</label>
-                <input
-                  type="password"
-                  placeholder="••••••••"
-                  value={chefPassword}
-                  onChange={(e) => setChefPassword(e.target.value)}
-                  required
-                />
+                <div className="password-input-wrapper">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="••••••••"
+                    value={chefPassword}
+                    onChange={(e) => setChefPassword(e.target.value)}
+                    required
+                  />
+                  <button 
+                    type="button" 
+                    className="password-toggle-btn"
+                    onClick={() => setShowPassword(!showPassword)}
+                    title={showPassword ? "Ficha Neno la Siri" : "Onyesha Neno la Siri"}
+                  >
+                    {showPassword ? "👁️" : "🙈"}
+                  </button>
+                </div>
               </div>
               <div className="login-actions">
-                <button type="button" className="btn-secondary" onClick={() => setShowChefLogin(false)}>
+                <button type="button" className="btn-secondary" onClick={() => { setShowChefLogin(false); setShowPassword(false); }}>
                   Cancel
                 </button>
                 <button type="submit" className="btn-primary-action">
