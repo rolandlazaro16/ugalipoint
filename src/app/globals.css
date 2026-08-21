@@ -330,11 +330,20 @@ body {
 
 .food-image-container {
   position: relative;
-  width: 100%;
-  height: clamp(90px, 18vh, 160px);
+  width: 280px;
+  height: 180px;
+  margin: 0 auto;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+@media (max-height: 700px) {
+  .food-image-container {
+    height: 130px;
+    width: 200px;
+  }
 }
 
 .food-plate-image {
@@ -526,6 +535,9 @@ body {
   padding: 12px;
   border-radius: 12px;
   font-size: 16px;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
   font-weight: 800;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.1s ease;
