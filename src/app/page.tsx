@@ -14,6 +14,82 @@ interface Order {
   status: "Received" | "Confirmed";
 }
 
+const LogoIcon = () => (
+  <svg 
+    width="42" 
+    height="42" 
+    viewBox="0 0 100 100" 
+    fill="none" 
+    xmlns="http://www.w3.org/2000/svg"
+    className="brand-logo-svg"
+  >
+    {/* Outer plate circle with warm sunset gradient */}
+    <circle cx="50" cy="50" r="46" stroke="url(#plateGradient)" strokeWidth="6" fill="url(#plateFill)" />
+    <circle cx="50" cy="50" r="38" stroke="url(#plateInnerGradient)" strokeWidth="1.5" />
+    
+    {/* Ugali Mound (Large soft dome in the upper-left/center) */}
+    <circle cx="45" cy="42" r="18" fill="url(#ugaliGradient)" stroke="#e5e7eb" strokeWidth="1.5" />
+    
+    {/* Chili Sauce/Lemon Bowl (Centered, lower) */}
+    <circle cx="48" cy="62" r="9" fill="url(#sauceGradient)" stroke="#ea580c" strokeWidth="2" />
+    {/* Seeds inside the bowl */}
+    <circle cx="45" cy="60" r="1" fill="#fef08a" />
+    <circle cx="51" cy="60" r="1" fill="#fef08a" />
+    <circle cx="48" cy="64" r="1" fill="#fef08a" />
+    
+    {/* Fresh Green Herbs/Leaves (Left side of the bowl) */}
+    <path d="M38 52 C30 50 28 58 38 60 Z" fill="url(#leafGradient)" stroke="#15803d" strokeWidth="1.2" />
+    <path d="M38 60 C32 62 30 70 38 70 Z" fill="url(#leafGradient)" stroke="#15803d" strokeWidth="1.2" />
+    
+    {/* Dagaa Fish / Sauce Drizzle (Wavy line flowing on the right side) */}
+    <path d="M64 26 Q74 36 64 46 T74 66" stroke="url(#dagaaLineGradient)" strokeWidth="3.5" strokeLinecap="round" />
+    
+    {/* Dagaa chunks / Crispy cubes (Bottom right) */}
+    <rect x="58" y="70" width="7" height="7" rx="2" transform="rotate(15 58 70)" fill="url(#crispyGradient)" stroke="#c2410c" strokeWidth="1.2" />
+    <rect x="68" y="66" width="6" height="6" rx="2" transform="rotate(45 68 66)" fill="url(#crispyGradient)" stroke="#c2410c" strokeWidth="1.2" />
+    
+    {/* Steam / Aroma lines (Rising from Ugali) */}
+    <path d="M42 21 Q40 16 44 12" stroke="#ea580c" strokeWidth="2" strokeLinecap="round" opacity="0.8" />
+    <path d="M48 21 Q46 17 50 13" stroke="#ea580c" strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
+
+    {/* Gradients */}
+    <defs>
+      <linearGradient id="plateGradient" x1="0" y1="0" x2="100" y2="100">
+        <stop offset="0%" stopColor="#ea580c" />
+        <stop offset="100%" stopColor="#f59e0b" />
+      </linearGradient>
+      <linearGradient id="plateFill" x1="0" y1="0" x2="100" y2="100">
+        <stop offset="0%" stopColor="#fffaf0" />
+        <stop offset="100%" stopColor="#ffedd5" />
+      </linearGradient>
+      <linearGradient id="plateInnerGradient" x1="0" y1="0" x2="100" y2="100">
+        <stop offset="0%" stopColor="#fed7aa" stopOpacity="0.5" />
+        <stop offset="100%" stopColor="#ffedd5" stopOpacity="0.2" />
+      </linearGradient>
+      <linearGradient id="ugaliGradient" x1="25" y1="22" x2="65" y2="62">
+        <stop offset="0%" stopColor="#ffffff" />
+        <stop offset="100%" stopColor="#f3f4f6" />
+      </linearGradient>
+      <linearGradient id="sauceGradient" x1="38" y1="52" x2="58" y2="72">
+        <stop offset="0%" stopColor="#ef4444" />
+        <stop offset="100%" stopColor="#b91c1c" />
+      </linearGradient>
+      <linearGradient id="leafGradient" x1="28" y1="50" x2="38" y2="70">
+        <stop offset="0%" stopColor="#22c55e" />
+        <stop offset="100%" stopColor="#15803d" />
+      </linearGradient>
+      <linearGradient id="dagaaLineGradient" x1="60" y1="20" x2="80" y2="70">
+        <stop offset="0%" stopColor="#fb923c" />
+        <stop offset="100%" stopColor="#ea580c" />
+      </linearGradient>
+      <linearGradient id="crispyGradient" x1="58" y1="65" x2="75" y2="75">
+        <stop offset="0%" stopColor="#f97316" />
+        <stop offset="100%" stopColor="#c2410c" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
 export default function Home() {
   const [view, setView] = useState<"home" | "orders" | "chef">("home");
   const [name, setName] = useState("");
@@ -253,7 +329,7 @@ export default function Home() {
       {/* Top Header */}
       <header className="top-header">
         <div className="brand-container" onClick={() => setView("home")} style={{ cursor: "pointer" }}>
-          <span className="brand-emoji">🍲</span>
+          <LogoIcon />
           <div className="brand-text-group">
             <span className="brand-name">Ugali Point</span>
             <span className="brand-tagline">Hot Ugali. Fresh Dagaa. Simple & Delicious.</span>
