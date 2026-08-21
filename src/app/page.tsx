@@ -170,7 +170,18 @@ export default function Home() {
       status: "Received"
     };
 
-    const updatedOrders = [newOrder, ...orders];
+    // Load latest orders from localStorage before prepending to avoid overwriting updates from other actions
+    const savedOrders = localStorage.getItem("ugalipoint_orders");
+    let currentStoredOrders: Order[] = orders;
+    if (savedOrders) {
+      try {
+        currentStoredOrders = JSON.parse(savedOrders);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    const updatedOrders = [newOrder, ...currentStoredOrders];
     saveOrders(updatedOrders);
     setLastSubmittedOrder(newOrder);
 
@@ -189,7 +200,16 @@ export default function Home() {
 
   // Chef Actions
   const handleApproveOrder = (orderId: string) => {
-    const updated = orders.map((o) => {
+    const savedOrders = localStorage.getItem("ugalipoint_orders");
+    let currentStoredOrders: Order[] = orders;
+    if (savedOrders) {
+      try {
+        currentStoredOrders = JSON.parse(savedOrders);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    const updated = currentStoredOrders.map((o) => {
       if (o.id === orderId) {
         return { ...o, status: "Confirmed" as const };
       }
@@ -199,7 +219,16 @@ export default function Home() {
   };
 
   const handleDeleteOrder = (orderId: string) => {
-    const updated = orders.filter((o) => o.id !== orderId);
+    const savedOrders = localStorage.getItem("ugalipoint_orders");
+    let currentStoredOrders: Order[] = orders;
+    if (savedOrders) {
+      try {
+        currentStoredOrders = JSON.parse(savedOrders);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    const updated = currentStoredOrders.filter((o) => o.id !== orderId);
     saveOrders(updated);
   };
 
