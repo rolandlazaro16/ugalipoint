@@ -254,7 +254,10 @@ export default function Home() {
       <header className="top-header">
         <div className="brand-container" onClick={() => setView("home")} style={{ cursor: "pointer" }}>
           <span className="brand-emoji">🍲</span>
-          <span className="brand-name">Ugali Point</span>
+          <div className="brand-text-group">
+            <span className="brand-name">Ugali Point</span>
+            <span className="brand-tagline">Hot Ugali. Fresh Dagaa. Simple & Delicious.</span>
+          </div>
         </div>
         <div className="header-profiles">
           <button 
