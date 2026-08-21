@@ -567,28 +567,24 @@ export default function Home() {
         ) : view === "orders" ? (
           <div className="orders-view fade-in">
             {/* Profile Pic Card in User Profile View */}
-            <div className="profile-section-card">
-              <div className="profile-avatar-container">
+            <div className="profile-square-card">
+              <div className="profile-avatar-container square">
                 {userProfilePic ? (
                   <img src={userProfilePic} alt="User Avatar" className="profile-avatar-img" />
                 ) : (
                   <span className="profile-avatar-placeholder">👤</span>
                 )}
-                <label className="upload-avatar-label">
-                  {isUploading ? "..." : "Badili"}
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => handleProfilePicUpload(e, "user")}
-                    style={{ display: "none" }}
-                    disabled={isUploading}
-                  />
-                </label>
               </div>
-              <div className="profile-text">
-                <h3>Wasifu wa Mteja</h3>
-                <p>Pakia picha yako hapa ili ionekane kwenye wasifu wako.</p>
-              </div>
+              <label className="upload-avatar-label square-label">
+                {isUploading ? "..." : "Pakia Picha"}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleProfilePicUpload(e, "user")}
+                  style={{ display: "none" }}
+                  disabled={isUploading}
+                />
+              </label>
             </div>
 
             <h2 className="view-title">My Orders</h2>
@@ -601,7 +597,7 @@ export default function Home() {
                 </button>
               </div>
             ) : (
-              <div className="orders-list">
+              <div className="orders-grid">
                 {orders.map((order) => (
                   <div key={order.id} className="order-card">
                     <div className="order-card-header">
@@ -625,28 +621,24 @@ export default function Home() {
           /* Chief Cooker Dashboard View */
           <div className="chef-view fade-in">
             {/* Profile Pic Card in Chef View */}
-            <div className="profile-section-card chef-theme">
-              <div className="profile-avatar-container">
+            <div className="profile-square-card chef-theme">
+              <div className="profile-avatar-container square">
                 {chefProfilePic ? (
                   <img src={chefProfilePic} alt="Chef Avatar" className="profile-avatar-img" />
                 ) : (
                   <span className="profile-avatar-placeholder">👨‍🍳</span>
                 )}
-                <label className="upload-avatar-label">
-                  {isUploading ? "..." : "Badili"}
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => handleProfilePicUpload(e, "chef")}
-                    style={{ display: "none" }}
-                    disabled={isUploading}
-                  />
-                </label>
               </div>
-              <div className="profile-text">
-                <h3>Chef Profile 👨‍🍳</h3>
-                <p>Pakia picha yako ya Uchef ili ionekane kwenye dashibodi.</p>
-              </div>
+              <label className="upload-avatar-label square-label">
+                {isUploading ? "..." : "Pakia Picha"}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleProfilePicUpload(e, "chef")}
+                  style={{ display: "none" }}
+                  disabled={isUploading}
+                />
+              </label>
             </div>
 
             <div className="chef-view-header">
