@@ -326,7 +326,11 @@ body {
 .home-view {
   display: flex;
   flex-direction: column;
-  gap: clamp(10px, 1.5vh, 20px);
+  gap: clamp(6px, 1vh, 14px);
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  justify-content: space-between;
 }
 
 .food-image-container {
