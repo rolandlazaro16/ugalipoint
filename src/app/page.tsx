@@ -403,7 +403,7 @@ export default function Home() {
                 <span className="badge-dot">•</span>
                 <span className="badge-item">Traditional</span>
               </div>
-              <div className="product-price">Tsh 7,000</div>
+              <div className="product-price">Tsh 1,000</div>
             </div>
 
             {/* Order Form */}
@@ -465,7 +465,7 @@ export default function Home() {
               </div>
 
               <button type="submit" className="btn-order-now">
-                ORDER NOW — Tsh {(quantity * 7000).toLocaleString()}
+                ORDER NOW — Tsh {(quantity * 1000).toLocaleString()}
               </button>
             </form>
           </div>
