@@ -251,9 +251,9 @@ body {
 /* Navigation Row */
 .nav-row {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   border-bottom: 1px solid #f3f4f6;
-  padding-bottom: 16px;
+  padding-bottom: 10px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -267,11 +267,11 @@ body {
   background-color: transparent;
   color: #6b7280;
   border: none;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
-  padding: 12px;
+  padding: 8px;
   cursor: pointer;
-  border-radius: 12px;
+  border-radius: 8px;
   transition: all 0.2s ease;
 }
 
@@ -331,7 +331,7 @@ body {
 .food-image-container {
   position: relative;
   width: 100%;
-  height: clamp(120px, 22vh, 220px);
+  height: clamp(90px, 18vh, 160px);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
@@ -349,8 +349,8 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: clamp(4px, 0.8vh, 10px);
-  margin: clamp(4px, 1vh, 12px) 0 clamp(2px, 0.5vh, 6px) 0;
+  gap: 2px;
+  margin: 8px 0 2px 0;
 }
 
 .product-title {
@@ -402,8 +402,8 @@ body {
   background-color: #fafaf9;
   border: 1px solid var(--color-border-light);
   border-radius: 12px;
-  padding: 4px;
-  height: 50px;
+  padding: 2px 4px;
+  height: 42px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -414,12 +414,12 @@ body {
 }
 
 .stepper-btn {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   border: none;
   background-color: transparent;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--color-text-light);
   cursor: pointer;
@@ -463,13 +463,13 @@ body {
 .order-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
 }
 
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 12px;
 }
 
 @media (max-width: 480px) {
@@ -497,10 +497,10 @@ body {
 }
 
 .form-group input {
-  padding: 14px;
+  padding: 10px 14px;
   border-radius: 12px;
   border: 1px solid var(--color-border-light);
-  font-size: 16px;
+  font-size: 15px;
   background-color: #fafaf9;
   color: var(--color-text-light);
   outline: none;
@@ -523,9 +523,9 @@ body {
   background-color: var(--color-primary);
   color: white;
   border: none;
-  padding: 16px;
-  border-radius: 16px;
-  font-size: 18px;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 16px;
   font-weight: 800;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.1s ease;
