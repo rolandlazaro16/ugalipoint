@@ -312,9 +312,19 @@ export default function Home() {
                 className="food-plate-image"
                 priority
               />
-              <div className="image-overlay">
-                <h3>Dagaa Special & Ugali wa Moto</h3>
+            </div>
+
+            {/* Product Details Block */}
+            <div className="product-details-container">
+              <h2 className="product-title">Ugali wa Moto na Dagaa</h2>
+              <div className="product-badges">
+                <span className="badge-item">Fresh</span>
+                <span className="badge-dot">•</span>
+                <span className="badge-item">Hot</span>
+                <span className="badge-dot">•</span>
+                <span className="badge-item">Traditional</span>
               </div>
+              <div className="product-price">Tsh 7,000</div>
             </div>
 
             {/* Order Form */}
@@ -343,16 +353,24 @@ export default function Home() {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="quantity-input">Quantity</label>
-                  <input
-                    id="quantity-input"
-                    type="number"
-                    min="1"
-                    max="50"
-                    value={quantity}
-                    onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
-                    required
-                  />
+                  <label>Quantity</label>
+                  <div className="quantity-stepper">
+                    <button 
+                      type="button" 
+                      className="stepper-btn" 
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    >
+                      −
+                    </button>
+                    <span className="stepper-val">{quantity}</span>
+                    <button 
+                      type="button" 
+                      className="stepper-btn" 
+                      onClick={() => setQuantity(quantity + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="location-input">Location</label>
@@ -368,7 +386,7 @@ export default function Home() {
               </div>
 
               <button type="submit" className="btn-order-now">
-                Order Now
+                ORDER NOW — Tsh {(quantity * 7000).toLocaleString()}
               </button>
             </form>
           </div>
