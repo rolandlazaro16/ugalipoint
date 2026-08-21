@@ -435,101 +435,104 @@ export default function Home() {
 
             {/* Order Form */}
             <form onSubmit={handleOrderSubmit} className="order-form">
-              {isProfileSaved ? (
-                <div className="saved-profile-stepper-container">
-                  <div className="saved-profile-info-summary">
-                    <span className="summary-text">Oda hii itatumwa kwa <strong>{name}</strong> ({phone}, {location})</span>
-                    <button 
-                      type="button" 
-                      className="btn-edit-profile" 
-                      onClick={() => setIsProfileSaved(false)}
-                      title="Badili Taarifa"
-                    >
-                      Badili Taarifa
-                    </button>
-                  </div>
-                  <div className="form-group quantity-only-group">
-                    <label>Quantity</label>
-                    <div className="quantity-stepper">
+              <div className="order-card-container">
+                <h3 className="order-card-title">YOUR ORDER</h3>
+                {isProfileSaved ? (
+                  <div className="saved-profile-stepper-container">
+                    <div className="saved-profile-info-summary">
+                      <span className="summary-text">Oda hii itatumwa kwa <strong>{name}</strong> ({phone}, {location})</span>
                       <button 
                         type="button" 
-                        className="stepper-btn" 
-                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                        className="btn-edit-profile" 
+                        onClick={() => setIsProfileSaved(false)}
+                        title="Badili Taarifa"
                       >
-                        −
-                      </button>
-                      <span className="stepper-val">{quantity}</span>
-                      <button 
-                        type="button" 
-                        className="stepper-btn" 
-                        onClick={() => setQuantity(quantity + 1)}
-                      >
-                        +
+                        Badili Taarifa
                       </button>
                     </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="form-grid">
-                  <div className="form-group">
-                    <label htmlFor="name-input">Name</label>
-                    <input
-                      id="name-input"
-                      type="text"
-                      placeholder="Jina lako"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="phone-input">Phone Number</label>
-                    <input
-                      id="phone-input"
-                      type="tel"
-                      placeholder="Namba ya simu"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Quantity</label>
-                    <div className="quantity-stepper">
-                      <button 
-                        type="button" 
-                        className="stepper-btn" 
-                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      >
-                        −
-                      </button>
-                      <span className="stepper-val">{quantity}</span>
-                      <button 
-                        type="button" 
-                        className="stepper-btn" 
-                        onClick={() => setQuantity(quantity + 1)}
-                      >
-                        +
-                      </button>
+                    <div className="form-group quantity-only-group">
+                      <label>Quantity</label>
+                      <div className="quantity-stepper">
+                        <button 
+                          type="button" 
+                          className="stepper-btn" 
+                          onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                        >
+                          −
+                        </button>
+                        <span className="stepper-val">{quantity}</span>
+                        <button 
+                          type="button" 
+                          className="stepper-btn" 
+                          onClick={() => setQuantity(quantity + 1)}
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="location-input">Location</label>
-                    <input
-                      id="location-input"
-                      type="text"
-                      placeholder="Mahali unapoishi"
-                      value={location}
-                      onChange={(e) => setLocation(e.target.value)}
-                      required
-                    />
+                ) : (
+                  <div className="form-grid">
+                    <div className="form-group">
+                      <label htmlFor="name-input">Name</label>
+                      <input
+                        id="name-input"
+                        type="text"
+                        placeholder="Jina lako"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="phone-input">Phone Number</label>
+                      <input
+                        id="phone-input"
+                        type="tel"
+                        placeholder="Namba ya simu"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Quantity</label>
+                      <div className="quantity-stepper">
+                        <button 
+                          type="button" 
+                          className="stepper-btn" 
+                          onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                        >
+                          −
+                        </button>
+                        <span className="stepper-val">{quantity}</span>
+                        <button 
+                          type="button" 
+                          className="stepper-btn" 
+                          onClick={() => setQuantity(quantity + 1)}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="location-input">Location</label>
+                      <input
+                        id="location-input"
+                        type="text"
+                        placeholder="Mahali unapoishi"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                        required
+                      />
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
 
-              <button type="submit" className="btn-order-now">
-                ORDER NOW — Tsh {(quantity * 1000).toLocaleString()}
-              </button>
+                <button type="submit" className="btn-order-now">
+                  ORDER NOW — Tsh {(quantity * 1000).toLocaleString()}
+                </button>
+              </div>
             </form>
           </div>
         ) : view === "orders" ? (
