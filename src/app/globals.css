@@ -41,7 +41,7 @@ body {
 
 .app-container {
   width: 100%;
-  max-width: 800px;
+  max-width: 580px;
   height: 100dvh;
   max-height: 100dvh;
   background-color: var(--color-card-light);
